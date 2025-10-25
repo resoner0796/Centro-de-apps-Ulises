@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corning Apps</title>
+    <title>Tienda de aplicaciones</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -16,7 +16,7 @@
     <style>
         /* Estilos personalizados (fondo, fuente de título, modales) */
         body {
-            /* CAMBIO AQUÍ: Fondo negro desvanecido */
+            /* CAMBIO (Hecho): Fondo negro desvanecido */
             background: linear-gradient(to bottom, #111111, #000000);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: #E5E7EB;
@@ -164,9 +164,8 @@
             text-decoration: none;
         }
         
-        /* --- CAMBIO AQUÍ (Nuevo Modal Lightbox) --- */
         #image-modal {
-            z-index: 2000; /* Por encima del modal de detalles */
+            z-index: 2000; 
             background-color: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
         }
@@ -182,7 +181,6 @@
             border-radius: 0.5rem;
             box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
-        /* --- FIN DEL CAMBIO --- */
         
         
         /* Estilos para Modal de Detalles */
@@ -258,14 +256,12 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             scroll-snap-align: center; 
             background-color: rgba(0, 0, 0, 0.2); 
-            /* --- CAMBIO AQUÍ (Cursor Zoom-in) --- */
             cursor: zoom-in;
             transition: opacity 0.2s;
         }
         .screenshots-gallery img:hover {
             opacity: 0.8;
         }
-        /* --- FIN DEL CAMBIO --- */
         
         /* Estilo para Checkbox PWA */
         .form-checkbox {
@@ -433,7 +429,7 @@
 
         <div class="text-center mb-12">
             <h1 id="login-trigger" class="titulo-principal text-3xl md:text-4xl text-white">
-                CORNING APPS
+                Tienda de aplicaciones
             </h1>
             <p class="text-base text-white opacity-30 font-light tracking-wide mt-3 font-signature">
                 Powered By Ulises Luna
@@ -551,6 +547,8 @@
         <span class="modal-close" id="lightbox-close">&times;</span>
         <img id="lightbox-image" src="" alt="Captura de pantalla ampliada">
     </div>
+    
+    
     <script type="module">
         // Importamos las funciones de Firebase (SDK modular v10+)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -591,14 +589,14 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // CAMBIO AQUÍ: Referencia a la colección de 'ulises_apps'
+        // CAMBIO (Hecho): Referencia a la colección de 'ulises_apps'
         const appsCollection = collection(db, "ulises_apps");
 
         // --- REFERENCIAS AL DOM ---
         const loginModal = document.getElementById("login-modal");
         const adminModal = document.getElementById("admin-modal");
         const detailsModal = document.getElementById("details-modal"); 
-        const imageModal = document.getElementById("image-modal"); // <-- Nuevo
+        const imageModal = document.getElementById("image-modal");
         
         const loginTrigger = document.getElementById("login-trigger");
         const adminGear = document.getElementById("admin-gear");
@@ -606,7 +604,7 @@
         const loginCloseBtn = document.getElementById("login-close");
         const adminCloseBtn = document.getElementById("admin-close");
         const detailsCloseBtn = document.getElementById("details-close"); 
-        const lightboxCloseBtn = document.getElementById("lightbox-close"); // <-- Nuevo
+        const lightboxCloseBtn = document.getElementById("lightbox-close");
         
         const loginForm = document.getElementById("login-form");
         const adminForm = document.getElementById("admin-form");
@@ -631,8 +629,8 @@
         const geminiEnhanceBtn = document.getElementById("gemini-enhance-btn");
         const geminiLoading = document.getElementById("gemini-loading");
         
-        const detailsScreenshotsGallery = document.getElementById("details-screenshots-gallery"); // <-- Nuevo
-        const lightboxImage = document.getElementById("lightbox-image"); // <-- Nuevo
+        const detailsScreenshotsGallery = document.getElementById("details-screenshots-gallery");
+        const lightboxImage = document.getElementById("lightbox-image");
 
         // Variables para Sortable y Conteo
         let sortable = null;
@@ -649,13 +647,13 @@
         loginCloseBtn.addEventListener("click", () => closeModal(loginModal));
         adminCloseBtn.addEventListener("click", () => closeModal(adminModal));
         detailsCloseBtn.addEventListener("click", () => closeModal(detailsModal)); 
-        lightboxCloseBtn.addEventListener("click", () => closeModal(imageModal)); // <-- Nuevo
+        lightboxCloseBtn.addEventListener("click", () => closeModal(imageModal));
         
         window.addEventListener("click", (event) => {
             if (event.target == loginModal) closeModal(loginModal);
             if (event.target == adminModal) closeModal(adminModal);
             if (event.target == detailsModal) closeModal(detailsModal); 
-            if (event.target == imageModal) closeModal(imageModal); // <-- Nuevo
+            if (event.target == imageModal) closeModal(imageModal);
         });
         
         // Abrir modal de detalles
@@ -700,7 +698,7 @@
                 }
                 
                 const screenshotsContainer = document.getElementById("details-screenshots-container");
-                const gallery = detailsScreenshotsGallery; // <-- Usamos la referencia
+                const gallery = detailsScreenshotsGallery;
                 gallery.innerHTML = ""; 
                 
                 const screenshots = JSON.parse(card.dataset.screenshots || '[]');
@@ -726,7 +724,7 @@
             }
         });
         
-        // --- CAMBIO AQUÍ (Nuevo Event Listener para Lightbox) ---
+        // Event Listener para Lightbox
         detailsScreenshotsGallery.addEventListener("click", (e) => {
             if (e.target.tagName === 'IMG') {
                 lightboxImage.src = e.target.src;
@@ -736,7 +734,6 @@
                 openModal(imageModal);
             }
         });
-        // --- FIN DEL CAMBIO ---
 
         // --- LÓGICA DE AUTENTICACIÓN ---
         onAuthStateChanged(auth, (user) => {
@@ -829,7 +826,7 @@
             
             try {
                 if (appId) {
-                    // CAMBIO AQUÍ
+                    // CAMBIO (Hecho)
                     const appRef = doc(db, "ulises_apps", appId); 
                     await updateDoc(appRef, appData);
                     console.log("App actualizada con ID:", appId);
@@ -956,7 +953,7 @@
         // Borrar App
         async function deleteApp(id) {
             try {
-                // CAMBIO AQUÍ
+                // CAMBIO (Hecho)
                 const appRef = doc(db, "ulises_apps", id); 
                 await deleteDoc(appRef);
                 console.log("App eliminada con ID:", id);
@@ -995,7 +992,7 @@
             Array.from(items).forEach((item, index) => {
                 const appId = item.getAttribute('data-id');
                 if (appId) {
-                    // CAMBIO AQUÍ
+                    // CAMBIO (Hecho)
                     const appRef = doc(db, "ulises_apps", appId); 
                     batch.update(appRef, { orden: index });
                 }
@@ -1026,7 +1023,7 @@
                     const app = documentSnapshot.data();
                     if (app.orden === undefined) {
                         console.warn(`App sin 'orden': ${app.nombre}. Asignando orden: ${index}`);
-                        // CAMBIO AQUÍ
+                        // CAMBIO (Hecho)
                         const appRef = doc(db, "ulises_apps", documentSnapshot.id); 
                         batch.update(appRef, { orden: index }); 
                         docsToBackfill++;
