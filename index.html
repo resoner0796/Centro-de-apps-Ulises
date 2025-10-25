@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de aplicaciones</title>
+    
+    <title>Portafolio de Apps</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -14,32 +15,42 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
     <style>
-        /* Estilos personalizados (fondo, fuente de título, modales) */
+        /* --- INICIO DE REDISEÑO (COLORES CLAROS Y FUENTES) --- */
+
         body {
-            /* CAMBIO (Hecho): Fondo negro desvanecido */
-            background: linear-gradient(to bottom, #111111, #000000);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: #E5E7EB;
+            /* CAMBIO: Fondo claro, fuente moderna por defecto */
+            background: #F9F9F9;
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            color: #222222; /* Texto oscuro principal */
             min-height: 100vh;
         }
 
         .titulo-principal {
-            font-family: 'Times New Roman', Times, serif;
-            font-weight: 400;
+            /* CAMBIO: Fuente moderna, color oscuro */
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 700; /* Más grueso */
+            color: #222222;
             cursor: pointer;
             user-select: none;
             display: inline-block;
         }
         
+        /* CAMBIO: Color del texto "Powered by" */
+        .powered-by-text {
+            color: #A0A0A0;
+        }
+
         .font-signature {
             font-family: 'Dancing Script', cursive;
         }
 
         /* Estilos para las tarjetas de apps */
         .app-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
+            /* CAMBIO: Fondo blanco, sombra suave, borde sutil */
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            backdrop-filter: none; /* Quitado el blur */
             transition: all 0.3s ease-in-out;
             display: flex;
             flex-direction: column;
@@ -52,8 +63,10 @@
             cursor: pointer; 
         }
         .app-card:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.15);
+            /* CAMBIO: Sombra más pronunciada en hover */
+            transform: scale(1.03); /* Un poco más sutil */
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            background: #FFFFFF;
         }
         
         .app-card img {
@@ -62,7 +75,8 @@
              border-radius: 1.25rem;
              margin-bottom: 1.5rem;
              object-fit: cover; 
-             background-color: rgba(255, 255, 0.2);
+             /* CAMBIO: Placeholder gris claro */
+             background-color: #F0F0F0;
              transition: transform 0.3s ease-in-out; 
              pointer-events: none; 
         }
@@ -70,17 +84,18 @@
         .app-card-nombre {
             font-size: 1.125rem; /* text-lg */
             font-weight: 600; /* semibold */
-            color: white;
+            /* CAMBIO: Color de texto oscuro */
+            color: #222222;
             margin-bottom: 0.25rem;
             pointer-events: none;
         }
         .app-card-desc {
             font-size: 0.875rem; /* text-sm */
-            color: #D1D5DB; /* gray-300 */
+            /* CAMBIO: Color de texto secundario */
+            color: #555555;
             flex-grow: 1; 
             pointer-events: none;
             
-            /* Limitar descripción en tarjeta */
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -88,7 +103,8 @@
             text-overflow: ellipsis;
         }
 
-        /* Animación de entrada */
+        /* --- FIN DE CAMBIOS DE TARJETA --- */
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -100,14 +116,14 @@
         /* Estilos para SortableJS */
         .sortable-ghost {
             opacity: 0.4;
-            background-color: rgba(0, 100, 255, 0.3);
-            border: 2px dashed rgba(255, 255, 255, 0.5);
+            background-color: #E0E7FF;
+            border: 2px dashed #3B82F6;
             border-radius: 1rem;
         }
         .sortable-chosen {
             cursor: grabbing !important;
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         .admin-sortable .app-card {
             cursor: grab !important;
@@ -123,7 +139,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.4); /* Fondo oscurecido */
             backdrop-filter: blur(5px);
             align-items: center;
             justify-content: center;
@@ -131,15 +147,16 @@
             padding-bottom: 2rem;
         }
         .modal-content {
-            background-color: #1F2937;
-            color: #E5E7EB;
+            /* CAMBIO: Modal blanco */
+            background-color: #FFFFFF;
+            color: #222222;
             margin: auto;
             padding: 0; 
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid #E0E0E0;
             width: 90%;
             max-width: 500px;
             border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden; 
         }
@@ -148,7 +165,8 @@
         }
         
         .modal-close {
-            color: #aaa;
+            /* CAMBIO: Color de 'x' para tema claro */
+            color: #888888;
             position: absolute;
             top: 1rem;
             right: 1.25rem;
@@ -160,7 +178,7 @@
         }
         .modal-close:hover,
         .modal-close:focus {
-            color: #fff;
+            color: #000000;
             text-decoration: none;
         }
         
@@ -173,6 +191,10 @@
             top: 1.5rem;
             right: 2.5rem;
             font-size: 40px;
+            color: #aaa; /* Color de 'x' del lightbox */
+        }
+        #lightbox-close:hover {
+            color: #fff;
         }
         #lightbox-image {
             max-width: 90vw;
@@ -189,8 +211,8 @@
             height: 12rem; /* 192px */
             border-radius: 1.5rem; 
             object-fit: cover; 
-            background-color: rgba(255, 255, 255, 0.2); 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            background-color: #F0F0F0; /* CAMBIO: Placeholder */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             margin-bottom: 1.5rem; 
         }
         
@@ -208,20 +230,20 @@
         #details-nombre {
             font-size: 1.75rem;
             font-weight: 700;
-            color: white;
+            color: #222222; /* CAMBIO: Color texto */
             margin-bottom: 0.5rem;
         }
         
         #details-desc {
             font-size: 1rem;
-            color: #D1D5DB;
+            color: #555555; /* CAMBIO: Color texto */
             margin-bottom: 1.5rem;
             line-height: 1.625; 
         }
         
         #details-pwa-info {
             font-size: 0.875rem; /* text-sm */
-            color: #9CA3AF; /* gray-400 */
+            color: #6B7280; /* CAMBIO: Color texto */
             margin-top: 0.75rem; /* mt-3 */
             display: none; /* Oculto por defecto */
         }
@@ -236,7 +258,7 @@
         #details-screenshots-container h3 {
             font-size: 1.25rem;
             font-weight: 600;
-            color: white;
+            color: #222222; /* CAMBIO: Color texto */
             margin-bottom: 1rem;
         }
         .screenshots-gallery {
@@ -253,9 +275,9 @@
             flex-shrink: 0; 
             border-radius: 0.5rem;
             object-fit: contain; 
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid #DDDDDD; /* CAMBIO: Borde */
             scroll-snap-align: center; 
-            background-color: rgba(0, 0, 0, 0.2); 
+            background-color: #F0F0F0; /* CAMBIO: Placeholder */
             cursor: zoom-in;
             transition: opacity 0.2s;
         }
@@ -268,8 +290,9 @@
             height: 1rem;
             width: 1rem;
             border-radius: 0.25rem;
-            background-color: #374151;
-            border: 1px solid #4B5563;
+            /* CAMBIO: Estilo claro */
+            background-color: #E5E7EB;
+            border: 1px solid #D1D5DB;
             cursor: pointer;
         }
         .form-checkbox:checked {
@@ -280,23 +303,28 @@
         /* Formularios y Botones */
         .form-input {
             width: 100%;
-            background-color: #374151;
-            border: 1px solid #4B5563;
-            color: #E5E7EB;
+            /* CAMBIO: Estilo claro */
+            background-color: #F3F4F6;
+            border: 1px solid #D1D5DB;
+            color: #222222;
             border-radius: 0.5rem;
             padding: 0.75rem 1rem;
             margin-top: 0.25rem;
         }
         .form-input:focus {
-            background-color: #4B5563;
+            /* CAMBIO: Estilo claro */
+            background-color: #FFFFFF;
             border-color: #3B82F6;
             outline: none;
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
         }
         .form-label {
-            color: #D1D5DB;
+            /* CAMBIO: Estilo claro */
+            color: #374151;
             font-weight: 500;
         }
+
+        /* --- Estilos de Botones (Se mantienen igual, funcionan bien) --- */
         .btn {
             display: inline-block;
             text-align: center;
@@ -328,11 +356,11 @@
             background-color: #DC2626;
         }
         .btn-secondary {
-            background-color: #4B5563;
-            color: white;
+            background-color: #E5E7EB; /* CAMBIO: Botón secundario claro */
+            color: #374151;
         }
         .btn-secondary:hover {
-            background-color: #6B7280;
+            background-color: #D1D5DB;
         }
         
         /* Admin Gear */
@@ -343,11 +371,11 @@
             right: 1.5rem;
             z-index: 900;
             cursor: pointer;
-            color: #9CA3AF;
+            color: #6B7280; /* CAMBIO: Color de ícono */
             transition: all 0.2s ease-in-out;
         }
         #admin-gear:hover {
-            color: #fff;
+            color: #000;
             transform: scale(1.1) rotate(15deg);
         }
         
@@ -359,7 +387,9 @@
             padding-right: 0.5rem; 
         }
         .admin-list-item {
-            background-color: #374151;
+            /* CAMBIO: Estilo claro */
+            background-color: #F9FAFB;
+            border: 1px solid #E5E7EB;
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
             display: flex;
@@ -373,6 +403,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             padding-right: 1rem;
+            color: #222222; /* Color de texto */
         }
         .admin-list-item .btn-group {
             display: flex;
@@ -382,7 +413,7 @@
         
         /* Error Message */
         .error-message {
-            color: #F87171; 
+            color: #EF4444; /* Rojo se mantiene para errores */
             font-size: 0.875rem;
             margin-top: 1rem;
             text-align: center;
@@ -393,7 +424,7 @@
         .gemini-btn {
             background: none;
             border: none;
-            color: #a5b4fc; /* Indigo-300 */
+            color: #3B82F6; /* CAMBIO: Color de acento */
             cursor: pointer;
             font-size: 1.5rem; /* text-2xl */
             line-height: 1;
@@ -401,11 +432,11 @@
             transition: all 0.2s;
         }
         .gemini-btn:hover {
-            color: #c7d2fe; /* Indigo-200 */
+            color: #2563EB; /* CAMBIO: Hover */
             transform: scale(1.2);
         }
         .gemini-btn:disabled {
-            color: #6B7280; /* Gray-500 */
+            color: #9CA3AF; /* CAMBIO: Deshabilitado */
             cursor: not-allowed;
             transform: none;
         }
@@ -414,7 +445,7 @@
         .admin-modal-content {
              padding: 2rem;
         }
-
+        /* --- FIN DE BLOQUE DE REDISEÑO --- */
     </style>
 </head>
 <body class="min-h-screen">
@@ -428,10 +459,12 @@
     <div class="container mx-auto px-4 py-12">
 
         <div class="text-center mb-12">
-            <h1 id="login-trigger" class="titulo-principal text-3xl md:text-4xl text-white">
-                Tienda de aplicaciones
+            
+            <h1 id="login-trigger" class="titulo-principal text-3xl md:text-4xl">
+                Portafolio de Apps
             </h1>
-            <p class="text-base text-white opacity-30 font-light tracking-wide mt-3 font-signature">
+            
+            <p class="text-base font-light tracking-wide mt-3 font-signature powered-by-text">
                 Powered By Ulises Luna
             </p>
         </div>
@@ -445,7 +478,8 @@
     <div id="login-modal" class="modal">
         <div class="modal-content admin-modal-content"> 
             <span class="modal-close" id="login-close">&times;</span>
-            <h2 class="text-2xl font-bold mb-6 text-center text-white">Iniciar Sesión</h2>
+            
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-900">Iniciar Sesión</h2>
             <form id="login-form">
                 <div class="mb-4">
                     <label for="email" class="form-label">Correo Electrónico</label>
@@ -464,7 +498,8 @@
     <div id="admin-modal" class="modal">
         <div class="modal-content admin-modal-content"> 
             <span class="modal-close" id="admin-close">&times;</span>
-            <h2 class="text-2xl font-bold mb-6 text-white">Administración de Apps</h2>
+            
+            <h2 class="text-2xl font-bold mb-6 text-gray-900">Administración de Apps</h2>
             
             <form id="admin-form" class="space-y-4">
                 <input type="hidden" id="edit-id"> 
@@ -503,9 +538,7 @@
                 <button type="button" id="admin-form-cancel" class="btn btn-secondary w-full" style="display: none;">Cancelar Edición</button>
             </form>
             
-            <hr class="border-gray-600 my-6">
-            
-            <h3 class="text-xl font-bold mb-4 text-white">Apps Actuales</h3>
+            <hr class="border-gray-300 my-6"> <h3 class="text-xl font-bold mb-4 text-gray-900">Apps Actuales</h3>
             <div id="admin-app-list">
                 </div>
 
@@ -523,8 +556,8 @@
                     <img id="details-icono" src="" alt="Icono de la App">
                 </div>
 
-                <h2 id="details-nombre" class="text-3xl font-bold mb-2 text-white">Nombre de la App</h2>
-                <p id="details-desc" class="text-lg text-gray-300 mb-6">Descripción completa de la aplicación...</p>
+                <h2 id="details-nombre" class="text-3xl font-bold mb-2">Nombre de la App</h2>
+                <p id="details-desc" class="text-lg mb-6">Descripción completa de la aplicación...</p>
                 
                 <a id="details-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                     <span id="details-link-text">Ir a la Aplicación</span>
@@ -589,7 +622,7 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // CAMBIO (Hecho): Referencia a la colección de 'ulises_apps'
+        // Referencia a la colección 'ulises_apps' (Se mantiene)
         const appsCollection = collection(db, "ulises_apps");
 
         // --- REFERENCIAS AL DOM ---
@@ -665,7 +698,7 @@
                 
                 document.getElementById("details-icono").src = card.dataset.icono;
                 document.getElementById("details-icono").onerror = () => {
-                     document.getElementById("details-icono").src = `https://placehold.co/192x192/FFFFFF/333333?text=${card.dataset.nombre}`
+                     document.getElementById("details-icono").src = `https://placehold.co/192x192/333333/FFFFFF?text=${card.dataset.nombre}` // Placeholder invertido
                 };
                 document.getElementById("details-nombre").textContent = card.dataset.nombre;
                 document.getElementById("details-desc").textContent = card.dataset.desc;
@@ -710,7 +743,7 @@
                             img.src = src;
                             img.alt = `Captura de ${card.dataset.nombre}`;
                             img.onerror = () => {
-                                img.src = `https://placehold.co/400x220/FFFFFF/333333?text=Error`
+                                img.src = `https://placehold.co/400x220/333333/FFFFFF?text=Error` // Placeholder invertido
                             };
                             gallery.appendChild(img);
                         }
@@ -729,7 +762,7 @@
             if (e.target.tagName === 'IMG') {
                 lightboxImage.src = e.target.src;
                 lightboxImage.onerror = () => {
-                     lightboxImage.src = `https://placehold.co/800x600/FFFFFF/333333?text=Error al cargar imagen`
+                     lightboxImage.src = `https://placehold.co/800x600/333333/FFFFFF?text=Error` // Placeholder invertido
                 };
                 openModal(imageModal);
             }
@@ -786,7 +819,7 @@
             }
         });
 
-        // --- LÓGICA DE FIRESTORE ---
+        // --- LÓGICA DE FIRESTORE (Se mantiene 'ulises_apps') ---
 
         // C (Create) y U (Update) 
         adminForm.addEventListener("submit", async (e) => {
@@ -826,7 +859,6 @@
             
             try {
                 if (appId) {
-                    // CAMBIO (Hecho)
                     const appRef = doc(db, "ulises_apps", appId); 
                     await updateDoc(appRef, appData);
                     console.log("App actualizada con ID:", appId);
@@ -875,7 +907,7 @@
             loadingAppsMsg.style.display = "block";
         });
 
-        // Renderizar Card (con data-ispwa)
+        // Renderizar Card
         function renderAppCard(app, id, index) { 
             const card = document.createElement("div"); 
             card.className = "app-card";
@@ -894,14 +926,13 @@
             card.innerHTML = `
                 <img src="${app.icono}" 
                      alt="Icono de ${app.nombre}"
-                     onerror="this.src='https://placehold.co/160x160/FFFFFF/333333?text=${app.nombre.charAt(0)}'">
-                <span class="app-card-nombre">${app.nombre}</span>
+                     onerror="this.src='https://placehold.co/160x160/333333/FFFFFF?text=${app.nombre.charAt(0)}'"> <span class="app-card-nombre">${app.nombre}</span>
                 <span class="app-card-desc">${app.descripcion}</span>
             `;
             appGallery.appendChild(card);
         }
 
-        // Renderizar item en lista de admin (con data-ispwa)
+        // Renderizar item en lista de admin
         function renderAdminListItem(app, id) {
             const item = document.createElement("div");
             item.className = "admin-list-item";
@@ -953,7 +984,6 @@
         // Borrar App
         async function deleteApp(id) {
             try {
-                // CAMBIO (Hecho)
                 const appRef = doc(db, "ulises_apps", id); 
                 await deleteDoc(appRef);
                 console.log("App eliminada con ID:", id);
@@ -992,7 +1022,6 @@
             Array.from(items).forEach((item, index) => {
                 const appId = item.getAttribute('data-id');
                 if (appId) {
-                    // CAMBIO (Hecho)
                     const appRef = doc(db, "ulises_apps", appId); 
                     batch.update(appRef, { orden: index });
                 }
@@ -1023,7 +1052,6 @@
                     const app = documentSnapshot.data();
                     if (app.orden === undefined) {
                         console.warn(`App sin 'orden': ${app.nombre}. Asignando orden: ${index}`);
-                        // CAMBIO (Hecho)
                         const appRef = doc(db, "ulises_apps", documentSnapshot.id); 
                         batch.update(appRef, { orden: index }); 
                         docsToBackfill++;
@@ -1122,11 +1150,11 @@
 
             if (!appName) {
                 geminiLoading.textContent = "Por favor, escribe un nombre primero.";
-                geminiLoading.style.color = "#F87171"; // Rojo
+                geminiLoading.style.color = "#EF4444"; // Rojo
                 geminiLoading.style.display = "inline";
                 await delay(2000);
                 geminiLoading.style.display = "none";
-                geminiLoading.style.color = "#9CA3AF"; // Gris
+                geminiLoading.style.color = "#6B7280"; // Gris
                 return;
             }
 
@@ -1150,12 +1178,12 @@
                 if(error.message.includes("API Key")) {
                     geminiLoading.textContent = "Falta API Key";
                 }
-                geminiLoading.style.color = "#F87171"; // Rojo
+                geminiLoading.style.color = "#EF4444"; // Rojo
                 await delay(2000);
             }
 
             geminiLoading.style.display = "none";
-            geminiLoading.style.color = "#9CA3AF"; // Gris
+            geminiLoading.style.color = "#6B7280"; // Gris
             geminiEnhanceBtn.disabled = false;
         });
 
