@@ -1,1181 +1,1168 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corning Apps</title>
-    
-    <!-- Cargamos Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Font para la firma -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
-    
-    <!-- SortableJS (Para arrastrar y soltar) -->
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Aplicaciones</title>     
+        <script src="https://cdn.tailwindcss.com"></script>
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
-    <style>
-        /* Estilos personalizados (fondo, fuente de título, modales) */
-        body {
-            background: linear-gradient(to bottom, #002244, #000000);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: #E5E7EB;
-            min-height: 100vh;
-        }
+    <style>
+        /* Estilos personalizados (fondo, fuente de título, modales) */
+        body {
+            /* --- CAMBIO AQUÍ: Fondo gris oscuro a negro --- */
+            background: linear-gradient(to bottom, #222222, #000000); 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #E5E7EB;
+            min-height: 100vh;
+        }
 
-        .titulo-principal {
-            font-family: 'Times New Roman', Times, serif;
-            font-weight: 400;
-            cursor: pointer;
-            user-select: none;
-            display: inline-block;
-        }
-        
-        .font-signature {
-            font-family: 'Dancing Script', cursive;
-        }
+        .titulo-principal {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 400;
+            cursor: pointer;
+            user-select: none;
+            display: inline-block;
+        }
+        
+        .font-signature {
+            font-family: 'Dancing Script', cursive;
+        }
 
-        /* Estilos para las tarjetas de apps */
-        .app-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            transition: all 0.3s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            height: 100%;
-            opacity: 0; 
-            cursor: pointer; 
-        }
-        .app-card:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .app-card img {
-             width: 10rem; /* 160px */
-             height: 10rem; /* 160px */
-             border-radius: 1.25rem;
-             margin-bottom: 1.5rem;
-             object-fit: cover; 
-             background-color: rgba(255, 255, 0.2);
-             transition: transform 0.3s ease-in-out; 
-             pointer-events: none; 
-        }
-        
-        .app-card-nombre {
-            font-size: 1.125rem; /* text-lg */
-            font-weight: 600; /* semibold */
-            color: white;
-            margin-bottom: 0.25rem;
-            pointer-events: none;
-        }
-        .app-card-desc {
-            font-size: 0.875rem; /* text-sm */
-            color: #D1D5DB; /* gray-300 */
-            flex-grow: 1; 
-            pointer-events: none;
-            
-            /* Limitar descripción en tarjeta */
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        /* Estilos para las tarjetas de apps */
+        .app-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            height: 100%;
+            opacity: 0; 
+            cursor: pointer; 
+        }
+        .app-card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .app-card img {
+             width: 10rem; /* 160px */
+             height: 10rem; /* 160px */
+             border-radius: 1.25rem;
+             margin-bottom: 1.5rem;
+             object-fit: cover; 
+             background-color: rgba(255, 255, 0.2);
+             transition: transform 0.3s ease-in-out; 
+             pointer-events: none; 
+        }
+        
+        .app-card-nombre {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* semibold */
+            color: white;
+            margin-bottom: 0.25rem;
+            pointer-events: none;
+        }
+        .app-card-desc {
+            font-size: 0.875rem; /* text-sm */
+            color: #D1D5DB; /* gray-300 */
+            flex-grow: 1; 
+            pointer-events: none;
+            
+            /* Limitar descripción en tarjeta */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-        /* Animación de entrada */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .card-fade-in {
-            animation: fadeInUp 0.5s ease-out forwards;
-        }
+        /* Animación de entrada */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card-fade-in {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
 
-        /* Estilos para SortableJS */
-        .sortable-ghost {
-            opacity: 0.4;
-            background-color: rgba(0, 100, 255, 0.3);
-            border: 2px dashed rgba(255, 255, 255, 0.5);
-            border-radius: 1rem;
-        }
-        .sortable-chosen {
-            cursor: grabbing !important;
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        .admin-sortable .app-card {
-            cursor: grab !important;
-        }
-        
-        /* Estilos de Modales */
-        .modal {
-            display: none; 
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            align-items: center;
-            justify-content: center;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-        .modal-content {
-            background-color: #1F2937;
-            color: #E5E7EB;
-            margin: auto;
-            padding: 0; 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 90%;
-            max-width: 500px;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden; 
-        }
-        #details-modal .modal-content {
-             max-width: 600px; 
-        }
-        
-        .modal-close {
-            color: #aaa;
-            position: absolute;
-            top: 1rem;
-            right: 1.25rem;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            line-height: 1;
-            z-index: 10; 
-        }
-        .modal-close:hover,
-        .modal-close:focus {
-            color: #fff;
-            text-decoration: none;
-        }
-        
-        /* --- CAMBIO AQUÍ (Nuevo Modal Lightbox) --- */
-        #image-modal {
-            z-index: 2000; /* Por encima del modal de detalles */
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-        }
-        #lightbox-close {
-            top: 1.5rem;
-            right: 2.5rem;
-            font-size: 40px;
-        }
-        #lightbox-image {
-            max-width: 90vw;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 0.5rem;
-            box-shadow: 0 0 40px rgba(0,0,0,0.5);
-        }
-        /* --- FIN DEL CAMBIO --- */
-        
-        
-        /* Estilos para Modal de Detalles */
-        #details-icono {
-            width: 12rem; /* 192px */
-            height: 12rem; /* 192px */
-            border-radius: 1.5rem; 
-            object-fit: cover; 
-            background-color: rgba(255, 255, 255, 0.2); 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            margin-bottom: 1.5rem; 
-        }
-        
-        #details-contenido {
-            padding: 2rem;
-            padding-top: 1rem; 
-            text-align: center; 
-        }
-        .details-icono-wrapper {
-            display: flex;
-            justify-content: center;
-            padding-top: 1rem; 
-        }
-        
-        #details-nombre {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-        
-        #details-desc {
-            font-size: 1rem;
-            color: #D1D5DB;
-            margin-bottom: 1.5rem;
-            line-height: 1.625; 
-        }
-        
-        #details-pwa-info {
-            font-size: 0.875rem; /* text-sm */
-            color: #9CA3AF; /* gray-400 */
-            margin-top: 0.75rem; /* mt-3 */
-            display: none; /* Oculto por defecto */
-        }
+        /* Estilos para SortableJS */
+        .sortable-ghost {
+            opacity: 0.4;
+            background-color: rgba(0, 100, 255, 0.3);
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 1rem;
+        }
+        .sortable-chosen {
+            cursor: grabbing !important;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .admin-sortable .app-card {
+            cursor: grab !important;
+        }
+        
+        /* Estilos de Modales */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .modal-content {
+            background-color: #1F2937;
+            color: #E5E7EB;
+            margin: auto;
+            padding: 0; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden; 
+        }
+        #details-modal .modal-content {
+             max-width: 600px; 
+        }
+        
+        .modal-close {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.25rem;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            z-index: 10; 
+        }
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        /* --- CAMBIO AQUÍ (Nuevo Modal Lightbox) --- */
+        #image-modal {
+            z-index: 2000; /* Por encima del modal de detalles */
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+        }
+        #lightbox-close {
+            top: 1.5rem;
+            right: 2.5rem;
+            font-size: 40px;
+        }
+        #lightbox-image {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+        /* --- FIN DEL CAMBIO --- */
+        
+        
+        /* Estilos para Modal de Detalles */
+        #details-icono {
+            width: 12rem; /* 192px */
+            height: 12rem; /* 192px */
+            border-radius: 1.5rem; 
+            object-fit: cover; 
+            background-color: rgba(255, 255, 255, 0.2); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            margin-bottom: 1.5rem; 
+        }
+        
+        #details-contenido {
+            padding: 2rem;
+            padding-top: 1rem; 
+            text-align: center; 
+        }
+        .details-icono-wrapper {
+            display: flex;
+            justify-content: center;
+            padding-top: 1rem; 
+        }
+        
+        #details-nombre {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        #details-desc {
+            font-size: 1rem;
+            color: #D1D5DB;
+            margin-bottom: 1.5rem;
+            line-height: 1.625; 
+        }
+        
+        #details-pwa-info {
+            font-size: 0.875rem; /* text-sm */
+            color: #9CA3AF; /* gray-400 */
+            margin-top: 0.75rem; /* mt-3 */
+            display: none; /* Oculto por defecto */
+        }
 
-        
-        /* Estilos para Galería de Capturas */
-        #details-screenshots-container {
-            display: none; 
-            padding: 0 2rem 2rem 2rem; 
-            text-align: left; 
-        }
-        #details-screenshots-container h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 1rem;
-        }
-        .screenshots-gallery {
-            display: flex;
-            overflow-x: auto; 
-            gap: 1rem;
-            padding-bottom: 1rem; 
-            scroll-snap-type: x mandatory;
-        }
-        
-        .screenshots-gallery img {
-            height: 220px; 
-            width: auto;   
-            flex-shrink: 0; 
-            border-radius: 0.5rem;
-            object-fit: contain; 
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            scroll-snap-align: center; 
-            background-color: rgba(0, 0, 0, 0.2); 
-            /* --- CAMBIO AQUÍ (Cursor Zoom-in) --- */
-            cursor: zoom-in;
-            transition: opacity 0.2s;
-        }
-        .screenshots-gallery img:hover {
-            opacity: 0.8;
-        }
-        /* --- FIN DEL CAMBIO --- */
-        
-        /* Estilo para Checkbox PWA */
-        .form-checkbox {
-            height: 1rem;
-            width: 1rem;
-            border-radius: 0.25rem;
-            background-color: #374151;
-            border: 1px solid #4B5563;
-            cursor: pointer;
-        }
-        .form-checkbox:checked {
-            background-color: #3B82F6;
-            border-color: #3B82F6;
-        }
-        
-        /* Formularios y Botones */
-        .form-input {
-            width: 100%;
-            background-color: #374151;
-            border: 1px solid #4B5563;
-            color: #E5E7EB;
-            border-radius: 0.5rem;
-            padding: 0.75rem 1rem;
-            margin-top: 0.25rem;
-        }
-        .form-input:focus {
-            background-color: #4B5563;
-            border-color: #3B82F6;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-        }
-        .form-label {
-            color: #D1D5DB;
-            font-weight: 500;
-        }
-        .btn {
-            display: inline-block;
-            text-align: center;
-            width: 100%;
-            font-weight: 600;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            text-decoration: none;
-        }
-        .btn-primary {
-            background-color: #3B82F6;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem; 
-        }
-        .btn-primary:hover {
-            background-color: #2563EB;
-        }
-        .btn-danger {
-            background-color: #EF4444;
-            color: white;
-        }
-        .btn-danger:hover {
-            background-color: #DC2626;
-        }
-        .btn-secondary {
-            background-color: #4B5563;
-            color: white;
-        }
-        .btn-secondary:hover {
-            background-color: #6B7280;
-        }
-        
-        /* Admin Gear */
-        #admin-gear {
-            display: none; 
-            position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
-            z-index: 900;
-            cursor: pointer;
-            color: #9CA3AF;
-            transition: all 0.2s ease-in-out;
-        }
-        #admin-gear:hover {
-            color: #fff;
-            transform: scale(1.1) rotate(15deg);
-        }
-        
-        /* Lista de Admin */
-        #admin-app-list {
-            max-height: 300px;
-            overflow-y: auto;
-            margin-top: 1.5rem;
-            padding-right: 0.5rem; 
-        }
-        .admin-list-item {
-            background-color: #374151;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        .admin-list-item span {
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            padding-right: 1rem;
-        }
-        .admin-list-item .btn-group {
-            display: flex;
-            gap: 0.5rem;
-            flex-shrink: 0;
-        }
-        
-        /* Error Message */
-        .error-message {
-            color: #F87171; 
-            font-size: 0.875rem;
-            margin-top: 1rem;
-            text-align: center;
-            display: none; 
-        }
+        
+        /* Estilos para Galería de Capturas */
+        #details-screenshots-container {
+            display: none; 
+            padding: 0 2rem 2rem 2rem; 
+            text-align: left; 
+        }
+        #details-screenshots-container h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        .screenshots-gallery {
+            display: flex;
+            overflow-x: auto; 
+            gap: 1rem;
+            padding-bottom: 1rem; 
+            scroll-snap-type: x mandatory;
+        }
+        
+        .screenshots-gallery img {
+            height: 220px; 
+            width: auto;   
+            flex-shrink: 0; 
+            border-radius: 0.5rem;
+            object-fit: contain; 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            scroll-snap-align: center; 
+            background-color: rgba(0, 0, 0, 0.2); 
+            /* --- CAMBIO AQUÍ (Cursor Zoom-in) --- */
+            cursor: zoom-in;
+            transition: opacity 0.2s;
+        }
+        .screenshots-gallery img:hover {
+            opacity: 0.8;
+        }
+        /* --- FIN DEL CAMBIO --- */
+        
+        /* Estilo para Checkbox PWA */
+        .form-checkbox {
+            height: 1rem;
+            width: 1rem;
+            border-radius: 0.25rem;
+            background-color: #374151;
+            border: 1px solid #4B5563;
+            cursor: pointer;
+        }
+        .form-checkbox:checked {
+            background-color: #3B82F6;
+            border-color: #3B82F6;
+        }
+        
+        /* Formularios y Botones */
+        .form-input {
+            width: 100%;
+            background-color: #374151;
+            border: 1px solid #4B5563;
+            color: #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            margin-top: 0.25rem;
+        }
+        .form-input:focus {
+            background-color: #4B5563;
+            border-color: #3B82F6;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+        .form-label {
+            color: #D1D5DB;
+            font-weight: 500;
+        }
+        .btn {
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            font-weight: 600;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background-color: #3B82F6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem; 
+        }
+        .btn-primary:hover {
+            background-color: #2563EB;
+        }
+        .btn-danger {
+            background-color: #EF4444;
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #DC2626;
+        }
+        .btn-secondary {
+            background-color: #4B5563;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #6B7280;
+        }
+        
+        /* Admin Gear */
+        #admin-gear {
+            display: none; 
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 900;
+            cursor: pointer;
+            color: #9CA3AF;
+            transition: all 0.2s ease-in-out;
+        }
+        #admin-gear:hover {
+            color: #fff;
+            transform: scale(1.1) rotate(15deg);
+        }
+        
+        /* Lista de Admin */
+        #admin-app-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1.5rem;
+            padding-right: 0.5rem; 
+        }
+        .admin-list-item {
+            background-color: #374151;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .admin-list-item span {
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 1rem;
+        }
+        .admin-list-item .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* Error Message */
+        .error-message {
+            color: #F87171; 
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            text-align: center;
+            display: none; 
+        }
 
-        /* Botón Gemini */
-        .gemini-btn {
-            background: none;
-            border: none;
-            color: #a5b4fc; /* Indigo-300 */
-            cursor: pointer;
-            font-size: 1.5rem; /* text-2xl */
-            line-height: 1;
-            padding: 0;
-            transition: all 0.2s;
-        }
-        .gemini-btn:hover {
-            color: #c7d2fe; /* Indigo-200 */
-            transform: scale(1.2);
-        }
-        .gemini-btn:disabled {
-            color: #6B7280; /* Gray-500 */
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        /* Contenido del modal de admin (con padding) */
-        .admin-modal-content {
-             padding: 2rem;
-        }
+        /* Botón Gemini */
+        .gemini-btn {
+            background: none;
+            border: none;
+            color: #a5b4fc; /* Indigo-300 */
+            cursor: pointer;
+            font-size: 1.5rem; /* text-2xl */
+            line-height: 1;
+            padding: 0;
+            transition: all 0.2s;
+        }
+        .gemini-btn:hover {
+            color: #c7d2fe; /* Indigo-200 */
+            transform: scale(1.2);
+        }
+        .gemini-btn:disabled {
+            color: #6B7280; /* Gray-500 */
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Contenido del modal de admin (con padding) */
+        .admin-modal-content {
+             padding: 2rem;
+        }
 
-    </style>
+    </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- Botón de Engrane (Admin) -->
-    <div id="admin-gear">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0.0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
-        </svg>
-    </div>
+        <div id="admin-gear">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0.0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+        </svg>
+    </div>
 
-    <!-- Contenedor Principal -->
-    <div class="container mx-auto px-4 py-12">
+        <div class="container mx-auto px-4 py-12">
 
-        <!-- Título Principal (Botón de Login) -->
-        <div class="text-center mb-12">
-            <h1 id="login-trigger" class="titulo-principal text-3xl md:text-4xl text-white">
-                CORNING APPS
-            </h1>
-            <p class="text-base text-white opacity-30 font-light tracking-wide mt-3 font-signature">
-                Powered By Ulises Luna
-            </p>
-        </div>
-        
-        <!-- Galería de Aplicaciones -->
-        <div id="app-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8">
-            <p id="loading-apps" class="text-center col-span-full">Cargando aplicaciones...</p>
-        </div>
+                <div class="text-center mb-12">
+            <h1 id="login-trigger" class="titulo-principal text-3xl md:text-4xl text-white">
+                                Tienda de Aplicaciones
+            </h1>
+            <p class="text-base text-white opacity-30 font-light tracking-wide mt-3 font-signature">
+                Powered By Ulises Luna
+            </p>
+        </div>
+        
+                <div id="app-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8">
+            <p id="loading-apps" class="text-center col-span-full">Cargando aplicaciones...</p>
+        </div>
 
-    </div>
+    </div>
 
-    <!-- Modal de Login -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content admin-modal-content"> 
-            <span class="modal-close" id="login-close">&times;</span>
-            <h2 class="text-2xl font-bold mb-6 text-center text-white">Iniciar Sesión</h2>
-            <form id="login-form">
-                <div class="mb-4">
-                    <label for="email" class="form-label">Correo Electrónico</label>
-                    <input type="email" id="login-email" class="form-input" required>
-                </div>
-                <div class="mb-6">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" id="login-password" class="form-input" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Entrar</button>
-                <p id="login-error" class="error-message">Error: Usuario o contraseña incorrectos.</p>
-            </form>
-        </div>
-    </div>
+        <div id="login-modal" class="modal">
+        <div class="modal-content admin-modal-content"> 
+            <span class="modal-close" id="login-close">&times;</span>
+            <h2 class="text-2xl font-bold mb-6 text-center text-white">Iniciar Sesión</h2>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" id="login-email" class="form-input" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="login-password" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Entrar</button>
+                <p id="login-error" class="error-message">Error: Usuario o contraseña incorrectos.</p>
+            </form>
+        </div>
+    </div>
 
-    <!-- Modal de Administración de Apps -->
-    <div id="admin-modal" class="modal">
-        <div class="modal-content admin-modal-content"> 
-            <span class="modal-close" id="admin-close">&times;</span>
-            <h2 class="text-2xl font-bold mb-6 text-white">Administración de Apps</h2>
-            
-            <form id="admin-form" class="space-y-4">
-                <input type="hidden" id="edit-id"> 
-                <div>
-                    <label for="app-nombre" class="form-label">Nombre de la App</label>
-                    <input type="text" id="app-nombre" class="form-input" required>
-                </div>
-                <div>
-                    <label for="app-icono" class="form-label">URL del Ícono</label>
-                    <input type="text" id="app-icono" class="form-input" placeholder="https://.../icono.png" required>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-1">
-                        <label for="app-desc" class="form-label">Descripción Breve</label>
-                        <button type="button" id="gemini-enhance-btn" class="gemini-btn" title="Generar/Mejorar con IA">✨</button>
-                    </div>
-                    <textarea id="app-desc" class="form-input" rows="2"></textarea>
-                    <span id="gemini-loading" class="text-sm text-gray-400 mt-1" style="display: none;">Generando...</span>
-                </div>
-                <div>
-                    <label for="app-link" class="form-label">Enlace (URL)</label>
-                    <input type="url" id="app-link" class="form-input" placeholder="https://..." required>
-                </div>
-                
-                <div>
-                    <label for="app-screenshots" class="form-label">Capturas (URLs separadas por coma)</label>
-                    <input type="text" id="app-screenshots" class="form-input" placeholder="https://.../img1.png, https://.../img2.png">
-                </div>
+        <div id="admin-modal" class="modal">
+        <div class="modal-content admin-modal-content"> 
+            <span class="modal-close" id="admin-close">&times;</span>
+            <h2 class="text-2xl font-bold mb-6 text-white">Administración de Apps</h2>
+            
+            <form id="admin-form" class="space-y-4">
+                <input type="hidden" id="edit-id"> 
+                <div>
+                    <label for="app-nombre" class="form-label">Nombre de la App</label>
+                    <input type="text" id="app-nombre" class="form-input" required>
+                </div>
+                <div>
+                    <label for="app-icono" class="form-label">URL del Ícono</label>
+                    <input type="text" id="app-icono" class="form-input" placeholder="https://.../icono.png" required>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label for="app-desc" class="form-label">Descripción Breve</label>
+                        <button type="button" id="gemini-enhance-btn" class="gemini-btn" title="Generar/Mejorar con IA">✨</button>
+                    </div>
+                    <textarea id="app-desc" class="form-input" rows="2"></textarea>
+                    <span id="gemini-loading" class="text-sm text-gray-400 mt-1" style="display: none;">Generando...</span>
+                </div>
+                <div>
+                    <label for="app-link" class="form-label">Enlace (URL)</label>
+                    <input type="url" id="app-link" class="form-input" placeholder="https://..." required>
+                </div>
+                
+                <div>
+                    <label for="app-screenshots" class="form-label">Capturas (URLs separadas por coma)</label>
+                    <input type="text" id="app-screenshots" class="form-input" placeholder="https://.../img1.png, https://.../img2.png">
+                </div>
 
-                <div class="flex items-center pt-2">
-                    <input type="checkbox" id="app-is-pwa" class="form-checkbox">
-                    <label for="app-is-pwa" class="ml-2 text-sm form-label">Es una PWA (App Instalable)</label>
-                </div>
+                <div class="flex items-center pt-2">
+                    <input type="checkbox" id="app-is-pwa" class="form-checkbox">
+                    <label for="app-is-pwa" class="ml-2 text-sm form-label">Es una PWA (App Instalable)</label>
+                </div>
 
-                <button type="submit" id="admin-form-submit" class="btn btn-primary !mt-6">Guardar App</button>
-                <button type="button" id="admin-form-cancel" class="btn btn-secondary w-full" style="display: none;">Cancelar Edición</button>
-            </form>
-            
-            <hr class="border-gray-600 my-6">
-            
-            <h3 class="text-xl font-bold mb-4 text-white">Apps Actuales</h3>
-            <div id="admin-app-list">
-                <!-- Items de la lista -->
-            </div>
+                <button type="submit" id="admin-form-submit" class="btn btn-primary !mt-6">Guardar App</button>
+                <button type="button" id="admin-form-cancel" class="btn btn-secondary w-full" style="display: none;">Cancelar Edición</button>
+            </form>
+            
+            <hr class="border-gray-600 my-6">
+            
+            <h3 class="text-xl font-bold mb-4 text-white">Apps Actuales</h3>
+            <div id="admin-app-list">
+                            </div>
 
-            <button id="logout-button" class="btn btn-danger w-full !mt-6">Cerrar Sesión</button>
-        </div>
-    </div>
-    
-    <!-- Modal de Detalles -->
-    <div id="details-modal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" id="details-close">&times;</span>
-            
-            <!-- Contenido Principal -->
-            <div id="details-contenido">
-                
-                <div class="details-icono-wrapper">
-                    <img id="details-icono" src="" alt="Icono de la App">
-                </div>
+            <button id="logout-button" class="btn btn-danger w-full !mt-6">Cerrar Sesión</button>
+        </div>
+    </div>
+    
+        <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="details-close">&times;</span>
+            
+                        <div id="details-contenido">
+                
+                <div class="details-icono-wrapper">
+                    <img id="details-icono" src="" alt="Icono de la App">
+                </div>
 
-                <h2 id="details-nombre" class="text-3xl font-bold mb-2 text-white">Nombre de la App</h2>
-                <p id="details-desc" class="text-lg text-gray-300 mb-6">Descripción completa de la aplicación...</p>
-                
-                <a id="details-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                    <span id="details-link-text">Ir a la Aplicación</span>
-                </a>
-                
-                <p id="details-pwa-info">
-                    Serás redirigido. Busca el ícono [ + ] en tu navegador para instalarla.
-                </p>
-            </div>
-            
-            <!-- Galería de Capturas -->
-            <div id="details-screenshots-container">
-                <h3>Capturas de Pantalla</h3>
-                <div id="details-screenshots-gallery" class="screenshots-gallery">
-                    <!-- Las imágenes se insertarán aquí con JS -->
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- --- CAMBIO AQUÍ (Nuevo Modal Lightbox) --- -->
-    <div id="image-modal" class="modal">
-        <span class="modal-close" id="lightbox-close">&times;</span>
-        <img id="lightbox-image" src="" alt="Captura de pantalla ampliada">
-    </div>
-    <!-- --- FIN DEL CAMBIO --- -->
-    
-    
-    <!-- Scripts de Firebase -->
-    <script type="module">
-        // Importamos las funciones de Firebase (SDK modular v10+)
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { 
-            getAuth, 
-            signInWithEmailAndPassword, 
-            signOut, 
-            onAuthStateChanged 
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { 
-            getFirestore, 
-            collection, 
-            onSnapshot, 
-            addDoc, 
-            doc, 
-            updateDoc, 
-            deleteDoc,
-            serverTimestamp,
-            query,
-            orderBy,
-            getDocs,
-            writeBatch
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+                <h2 id="details-nombre" class="text-3xl font-bold mb-2 text-white">Nombre de la App</h2>
+                <p id="details-desc" class="text-lg text-gray-300 mb-6">Descripción completa de la aplicación...</p>
+                
+                <a id="details-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <span id="details-link-text">Ir a la Aplicación</span>
+                </a>
+                
+                <p id="details-pwa-info">
+                    Serás redirigido. Busca el ícono [ + ] en tu navegador para instalarla.
+                </p>
+            </div>
+            
+                        <div id="details-screenshots-container">
+                <h3>Capturas de Pantalla</h3>
+                <div id="details-screenshots-gallery" class="screenshots-gallery">
+                                    </div>
+            </div>
+        </div>
+    </div>
+    
+        <div id="image-modal" class="modal">
+        <span class="modal-close" id="lightbox-close">&times;</span>
+        <img id="lightbox-image" src="" alt="Captura de pantalla ampliada">
+    </div>
+        
+    
+        <script type="module">
+        // Importamos las funciones de Firebase (SDK modular v10+)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            signOut, 
+            onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { 
+            getFirestore, 
+            collection, 
+            onSnapshot, 
+            addDoc, 
+            doc, 
+            updateDoc, 
+            deleteDoc,
+            serverTimestamp,
+            query,
+            orderBy,
+            getDocs,
+            writeBatch
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // Tu configuración de Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyDtlj3ppT9WBGMR60SZx0TZmAo3BXQWDX0",
-            authDomain: "rastreador-de-ordenes.firebaseapp.com",
-            databaseURL: "https://rastreador-de-ordenes-default-rtdb.firebaseio.com",
-            projectId: "rastreador-de-ordenes",
-            storageBucket: "rastreador-de-ordenes.firebasestorage.app",
-            messagingSenderId: "956052823395",
-            appId: "1:956052823395:web:9f5585de67784b413cc756"
-        };
+        // Tu configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDtlj3ppT9WBGMR60SZx0TZmAo3BXQWDX0",
+            authDomain: "rastreador-de-ordenes.firebaseapp.com",
+            databaseURL: "https://rastreador-de-ordenes-default-rtdb.firebaseio.com",
+            projectId: "rastreador-de-ordenes",
+            storageBucket: "rastreador-de-ordenes.firebasestorage.app",
+            messagingSenderId: "956052823395",
+            appId: "1:956052823395:web:9f5585de67784b413cc756"
+        };
 
-        // Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        // Referencia a la colección de 'apps'
-        const appsCollection = collection(db, "apps");
+        // --- CAMBIO AQUÍ: Nombre de la colección ---
+        const appsCollection = collection(db, "ulises_apps");
 
-        // --- REFERENCIAS AL DOM ---
-        const loginModal = document.getElementById("login-modal");
-        const adminModal = document.getElementById("admin-modal");
-        const detailsModal = document.getElementById("details-modal"); 
-        const imageModal = document.getElementById("image-modal"); // <-- Nuevo
-        
-        const loginTrigger = document.getElementById("login-trigger");
-        const adminGear = document.getElementById("admin-gear");
-        
-        const loginCloseBtn = document.getElementById("login-close");
-        const adminCloseBtn = document.getElementById("admin-close");
-        const detailsCloseBtn = document.getElementById("details-close"); 
-        const lightboxCloseBtn = document.getElementById("lightbox-close"); // <-- Nuevo
-        
-        const loginForm = document.getElementById("login-form");
-        const adminForm = document.getElementById("admin-form");
-        
-        const editIdInput = document.getElementById("edit-id");
-        const appNombreInput = document.getElementById("app-nombre");
-        const appIconoInput = document.getElementById("app-icono");
-        const appDescInput = document.getElementById("app-desc");
-        const appLinkInput = document.getElementById("app-link");
-        const appScreenshotsInput = document.getElementById("app-screenshots"); 
-        const appIsPWAInput = document.getElementById("app-is-pwa"); 
-        const adminFormSubmitBtn = document.getElementById("admin-form-submit");
-        const adminFormCancelBtn = document.getElementById("admin-form-cancel");
-        
-        const appGallery = document.getElementById("app-gallery");
-        const adminAppList = document.getElementById("admin-app-list");
-        const loadingAppsMsg = document.getElementById("loading-apps");
+        // --- REFERENCIAS AL DOM ---
+        const loginModal = document.getElementById("login-modal");
+        const adminModal = document.getElementById("admin-modal");
+        const detailsModal = document.getElementById("details-modal"); 
+        const imageModal = document.getElementById("image-modal"); // <-- Nuevo
+        
+        const loginTrigger = document.getElementById("login-trigger");
+        const adminGear = document.getElementById("admin-gear");
+        
+        const loginCloseBtn = document.getElementById("login-close");
+        const adminCloseBtn = document.getElementById("admin-close");
+        const detailsCloseBtn = document.getElementById("details-close"); 
+        const lightboxCloseBtn = document.getElementById("lightbox-close"); // <-- Nuevo
+        
+        const loginForm = document.getElementById("login-form");
+        const adminForm = document.getElementById("admin-form");
+        
+        const editIdInput = document.getElementById("edit-id");
+        const appNombreInput = document.getElementById("app-nombre");
+        const appIconoInput = document.getElementById("app-icono");
+        const appDescInput = document.getElementById("app-desc");
+        const appLinkInput = document.getElementById("app-link");
+        const appScreenshotsInput = document.getElementById("app-screenshots"); 
+        const appIsPWAInput = document.getElementById("app-is-pwa"); 
+        const adminFormSubmitBtn = document.getElementById("admin-form-submit");
+        const adminFormCancelBtn = document.getElementById("admin-form-cancel");
+        
+        const appGallery = document.getElementById("app-gallery");
+        const adminAppList = document.getElementById("admin-app-list");
+        const loadingAppsMsg = document.getElementById("loading-apps");
 
-        const logoutButton = document.getElementById("logout-button");
-        const loginErrorMsg = document.getElementById("login-error");
+        const logoutButton = document.getElementById("logout-button");
+        const loginErrorMsg = document.getElementById("login-error");
 
-        const geminiEnhanceBtn = document.getElementById("gemini-enhance-btn");
-        const geminiLoading = document.getElementById("gemini-loading");
-        
-        const detailsScreenshotsGallery = document.getElementById("details-screenshots-gallery"); // <-- Nuevo
-        const lightboxImage = document.getElementById("lightbox-image"); // <-- Nuevo
+        const geminiEnhanceBtn = document.getElementById("gemini-enhance-btn");
+        const geminiLoading = document.getElementById("gemini-loading");
+        
+        const detailsScreenshotsGallery = document.getElementById("details-screenshots-gallery"); // <-- Nuevo
+        const lightboxImage = document.getElementById("lightbox-image"); // <-- Nuevo
 
-        // Variables para Sortable y Conteo
-        let sortable = null;
-        let currentAppCount = 0; 
-        let isBackfilling = false; 
+        // Variables para Sortable y Conteo
+        let sortable = null;
+        let currentAppCount = 0; 
+        let isBackfilling = false; 
 
-        // --- LÓGICA DE MODALES ---
-        function openModal(modal) { modal.style.display = "flex"; }
-        function closeModal(modal) { modal.style.display = "none"; }
-        
-        loginTrigger.addEventListener("click", () => openModal(loginModal));
-        adminGear.addEventListener("click", () => openModal(adminModal));
-        
-        loginCloseBtn.addEventListener("click", () => closeModal(loginModal));
-        adminCloseBtn.addEventListener("click", () => closeModal(adminModal));
-        detailsCloseBtn.addEventListener("click", () => closeModal(detailsModal)); 
-        lightboxCloseBtn.addEventListener("click", () => closeModal(imageModal)); // <-- Nuevo
-        
-        window.addEventListener("click", (event) => {
-            if (event.target == loginModal) closeModal(loginModal);
-            if (event.target == adminModal) closeModal(adminModal);
-            if (event.target == detailsModal) closeModal(detailsModal); 
-            if (event.target == imageModal) closeModal(imageModal); // <-- Nuevo
-        });
-        
-        // Abrir modal de detalles
-        appGallery.addEventListener("click", (e) => {
-            const card = e.target.closest(".app-card");
-            
-            if (card && !card.classList.contains("sortable-chosen")) {
-                e.preventDefault();
-                
-                document.getElementById("details-icono").src = card.dataset.icono;
-                document.getElementById("details-icono").onerror = () => {
-                     document.getElementById("details-icono").src = `https://placehold.co/192x192/FFFFFF/333333?text=${card.dataset.nombre}`
-                };
-                document.getElementById("details-nombre").textContent = card.dataset.nombre;
-                document.getElementById("details-desc").textContent = card.dataset.desc;
-                
-                const isPWA = card.dataset.ispwa === 'true';
-                const button = document.getElementById("details-link");
-                const buttonText = document.getElementById("details-link-text");
-                const pwaInfo = document.getElementById("details-pwa-info"); 
-                const oldIcon = button.querySelector('svg');
-                if (oldIcon) oldIcon.remove(); 
+        // --- LÓGICA DE MODALES ---
+        function openModal(modal) { modal.style.display = "flex"; }
+        function closeModal(modal) { modal.style.display = "none"; }
+        
+        loginTrigger.addEventListener("click", () => openModal(loginModal));
+        adminGear.addEventListener("click", () => openModal(adminModal));
+        
+        loginCloseBtn.addEventListener("click", () => closeModal(loginModal));
+        adminCloseBtn.addEventListener("click", () => closeModal(adminModal));
+        detailsCloseBtn.addEventListener("click", () => closeModal(detailsModal)); 
+        lightboxCloseBtn.addEventListener("click", () => closeModal(imageModal)); // <-- Nuevo
+        
+        window.addEventListener("click", (event) => {
+            if (event.target == loginModal) closeModal(loginModal);
+            if (event.target == adminModal) closeModal(adminModal);
+            if (event.target == detailsModal) closeModal(detailsModal); 
+            if (event.target == imageModal) closeModal(imageModal); // <-- Nuevo
+        });
+        
+        // Abrir modal de detalles
+        appGallery.addEventListener("click", (e) => {
+            const card = e.target.closest(".app-card");
+            
+            if (card && !card.classList.contains("sortable-chosen")) {
+                e.preventDefault();
+                
+                document.getElementById("details-icono").src = card.dataset.icono;
+                document.getElementById("details-icono").onerror = () => {
+                     document.getElementById("details-icono").src = `https://placehold.co/192x192/FFFFFF/333333?text=${card.dataset.nombre}`
+                };
+                document.getElementById("details-nombre").textContent = card.dataset.nombre;
+                document.getElementById("details-desc").textContent = card.dataset.desc;
+                
+                const isPWA = card.dataset.ispwa === 'true';
+                const button = document.getElementById("details-link");
+                const buttonText = document.getElementById("details-link-text");
+                const pwaInfo = document.getElementById("details-pwa-info"); 
+                const oldIcon = button.querySelector('svg');
+                if (oldIcon) oldIcon.remove(); 
 
-                button.href = card.dataset.link; 
+                button.href = card.dataset.link; 
 
-                if (isPWA) {
-                    buttonText.textContent = "Instalar Aplicación";
-                    pwaInfo.style.display = "block"; 
-                    button.insertAdjacentHTML('afterbegin', `
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                        </svg>
-                    `);
-                } else {
-                    buttonText.textContent = "Ir a la Aplicación";
-                    pwaInfo.style.display = "none"; 
-                    button.insertAdjacentHTML('afterbegin', `
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                        </svg>
-                    `);
-                }
-                
-                const screenshotsContainer = document.getElementById("details-screenshots-container");
-                const gallery = detailsScreenshotsGallery; // <-- Usamos la referencia
-                gallery.innerHTML = ""; 
-                
-                const screenshots = JSON.parse(card.dataset.screenshots || '[]');
-                
-                if (screenshots.length > 0) {
-                    screenshots.forEach(src => {
-                        if(src) { 
-                            const img = document.createElement("img");
-                            img.src = src;
-                            img.alt = `Captura de ${card.dataset.nombre}`;
-                            img.onerror = () => {
-                                img.src = `https://placehold.co/400x220/FFFFFF/333333?text=Error`
-                            };
-                            gallery.appendChild(img);
-                        }
-                    });
-                    screenshotsContainer.style.display = "block"; 
-                } else {
-                    screenshotsContainer.style.display = "none"; 
-                }
+                if (isPWA) {
+                    buttonText.textContent = "Instalar Aplicación";
+                    pwaInfo.style.display = "block"; 
+                    button.insertAdjacentHTML('afterbegin', `
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                        </svg>
+                    `);
+                } else {
+                    buttonText.textContent = "Ir a la Aplicación";
+                    pwaInfo.style.display = "none"; 
+                    button.insertAdjacentHTML('afterbegin', `
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                        </svg>
+                    `);
+                }
+                
+                const screenshotsContainer = document.getElementById("details-screenshots-container");
+                const gallery = detailsScreenshotsGallery; // <-- Usamos la referencia
+                gallery.innerHTML = ""; 
+                
+                const screenshots = JSON.parse(card.dataset.screenshots || '[]');
+                
+                if (screenshots.length > 0) {
+                    screenshots.forEach(src => {
+                        if(src) { 
+                            const img = document.createElement("img");
+                            img.src = src;
+                            img.alt = `Captura de ${card.dataset.nombre}`;
+                            img.onerror = () => {
+                                img.src = `https://placehold.co/400x220/FFFFFF/333333?text=Error`
+                            };
+                            gallery.appendChild(img);
+                        }
+                    });
+                    screenshotsContainer.style.display = "block";D
+                } else {
+                    screenshotsContainer.style.display = "none"; 
+                }
 
-                openModal(detailsModal);
-            }
-        });
-        
-        // --- CAMBIO AQUÍ (Nuevo Event Listener para Lightbox) ---
-        detailsScreenshotsGallery.addEventListener("click", (e) => {
-            if (e.target.tagName === 'IMG') {
-                lightboxImage.src = e.target.src;
-                lightboxImage.onerror = () => {
-                     lightboxImage.src = `https://placehold.co/800x600/FFFFFF/333333?text=Error al cargar imagen`
-                };
-                openModal(imageModal);
-            }
-        });
-        // --- FIN DEL CAMBIO ---
+                openModal(detailsModal);
+            }
+        });
+        
+        // --- CAMBIO AQUÍ (Nuevo Event Listener para Lightbox) ---
+        detailsScreenshotsGallery.addEventListener("click", (e) => {
+            if (e.target.tagName === 'IMG') {
+                lightboxImage.src = e.target.src;
+                lightboxImage.onerror = () => {
+                     lightboxImage.src = `https://placehold.co/800x600/FFFFFF/333333?text=Error al cargar imagen`
+                };
+                openModal(imageModal);
+            }
+        });
+        // --- FIN DEL CAMBIO ---
 
-        // --- LÓGICA DE AUTENTICACIÓN ---
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                adminGear.style.display = "block";
-                closeModal(loginModal); 
-                loginForm.reset(); 
-                loginErrorMsg.style.display = "none";
+        // --- LÓGICA DE AUTENTICACIÓN ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                adminGear.style.display = "block";
+                closeModal(loginModal); 
+                loginForm.reset(); 
+                loginErrorMsg.style.display = "none";
 
-                if (!isBackfilling) {
-                    checkAndBackfillData(); 
-                }
-                appGallery.classList.add("admin-sortable"); 
-                if (!sortable) {
-                    initSortable();
-                }
-            } else {
-                adminGear.style.display = "none"; 
-                closeModal(adminModal); 
-                appGallery.classList.remove("admin-sortable");
-                if (sortable) {
-                    sortable.destroy();
-                    sortable = null;
-                }
-            }
-        });
+                if (!isBackfilling) {
+                    checkAndBackfillData(); 
+                }
+                appGallery.classList.add("admin-sortable"); 
+                if (!sortable) {
+                    initSortable();
+                }
+            } else {
+                adminGear.style.display = "none"; 
+                closeModal(adminModal); 
+                appGallery.classList.remove("admin-sortable");
+                if (sortable) {
+                    sortable.destroy();
+                    sortable = null;
+                }
+            }
+        });
 
-        // Formulario de login
-        loginForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const email = document.getElementById("login-email").value;
-            const password = document.getElementById("login-password").value;
-            loginErrorMsg.style.display = "none"; 
+        // Formulario de login
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+            loginErrorMsg.style.display = "none"; 
 
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-            } catch (error) {
-                console.error("Error al iniciar sesión:", error.message);
-                loginErrorMsg.textContent = "Error: " + error.message;
-                loginErrorMsg.style.display = "block";
-            }
-        });
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                console.error("Error al iniciar sesión:", error.message);
+                loginErrorMsg.textContent = "Error: " + error.message;
+                loginErrorMsg.style.display = "block";
+            }
+        });
 
-        // Cerrar sesión
-        logoutButton.addEventListener("click", async () => {
-            try {
-                await signOut(auth);
-            } catch (error) {
-                console.error("Error al cerrar sesión:", error);
-            }
-        });
+        // Cerrar sesión
+        logoutButton.addEventListener("click", async () => {
+            try {
+                await signOut(auth);
+            } catch (error) {
+                console.error("Error al cerrar sesión:", error);
+            }
+        });
 
-        // --- LÓGICA DE FIRESTORE ---
+        // --- LÓGICA DE FIRESTORE ---
 
-        // C (Create) y U (Update) 
-        adminForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            
-            const appId = editIdInput.value;
-            const screenshotsArray = appScreenshotsInput.value
-                .split(',')
-                .map(s => s.trim())
-                .filter(s => s); 
+        // C (Create) y U (Update) 
+        adminForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const appId = editIdInput.value;
+            const screenshotsArray = appScreenshotsInput.value
+                .split(',')
+                .map(s => s.trim())
+                .filter(s => s); 
 
-            let appData;
+            let appData;
 
-            if (appId) {
-                // Actualizando
-                appData = {
-                    nombre: appNombreInput.value,
-                    icono: appIconoInput.value,
-                    descripcion: appDescInput.value,
-                    link: appLinkInput.value,
-                    screenshots: screenshotsArray, 
-                    isPWA: appIsPWAInput.checked 
-                };
-            } else {
-                // Creando
-                appData = {
-                    nombre: appNombreInput.value,
-                    icono: appIconoInput.value,
-                    descripcion: appDescInput.value,
-                    link: appLinkInput.value,
-                    creadoEn: serverTimestamp(),
-                    orden: currentAppCount,
-                    screenshots: screenshotsArray,
-                    isPWA: appIsPWAInput.checked 
-                };
-            }
-            
-            try {
-                if (appId) {
-                    const appRef = doc(db, "apps", appId);
-                    await updateDoc(appRef, appData);
-                    console.log("App actualizada con ID:", appId);
-                } else {
-                    const docRef = await addDoc(appsCollection, appData);
-                    console.log("App guardada con ID:", docRef.id);
-                }
-                resetAdminForm();
-            } catch (error) {
-                console.error("Error al guardar la app:", error);
-            }
-        });
+            if (appId) {
+                // Actualizando
+                appData = {
+                    nombre: appNombreInput.value,
+                    icono: appIconoInput.value,
+                    descripcion: appDescInput.value,
+                    link: appLinkInput.value,
+                    screenshots: screenshotsArray, 
+                    isPWA: appIsPWAInput.checked 
+                };
+            } else {
+                // Creando
+                appData = {
+                    nombre: appNombreInput.value,
+                    icono: appIconoInput.value,
+                    descripcion: appDescInput.value,
+                    link: appLinkInput.value,
+                    creadoEn: serverTimestamp(),
+                    orden: currentAppCount,
+                    screenshots: screenshotsArray,
+                    isPWA: appIsPWAInput.checked 
+                };
+            }
+            
+            try {
+                if (appId) {
+                    // --- CAMBIO AQUÍ: Nombre de la colección ---
+                    const appRef = doc(db, "ulises_apps", appId); 
+                    await updateDoc(appRef, appData);
+                    console.log("App actualizada con ID:", appId);
+                } else {
+                    const docRef = await addDoc(appsCollection, appData);
+                    console.log("App guardada con ID:", docRef.id);
+                }
+                resetAdminForm();
+            } catch (error) {
+                console.error("Error al guardar la app:", error);
+            }
+        });
 
-        // R (Read) - Cargar apps en tiempo real, ORDENADAS
-        const q = query(appsCollection, orderBy("orden")); 
-        
-        onSnapshot(q, (snapshot) => {
-            currentAppCount = snapshot.size; 
-            
-            if (snapshot.empty && !isBackfilling) {
-                appGallery.innerHTML = ""; 
-                loadingAppsMsg.textContent = "No hay aplicaciones para mostrar.";
-                loadingAppsMsg.style.display = "block";
-                return;
-            }
-            
-            if (snapshot.empty && isBackfilling) {
-                loadingAppsMsg.textContent = "Corrigiendo apps, un momento...";
-                loadingAppsMsg.style.display = "block";
-                return;
-            }
-            
-            loadingAppsMsg.style.display = "none";
-            appGallery.innerHTML = ""; 
-            adminAppList.innerHTML = ""; 
-            
-            snapshot.docs.forEach((doc, index) => { 
-                const app = doc.data();
-                const id = doc.id;
-                renderAppCard(app, id, index); 
-                renderAdminListItem(app, id);
-            });
-        }, (error) => {
-            console.error("Error al leer de Firestore: ", error);
-            loadingAppsMsg.innerHTML = `<p class="text-red-400">Error al cargar apps. Revisa la consola (F12) para más detalles.</p>`;
-            loadingAppsMsg.style.display = "block";
-        });
+        // R (Read) - Cargar apps en tiempo real, ORDENADAS
+        const q = query(appsCollection, orderBy("orden")); 
+        
+        onSnapshot(q, (snapshot) => {
+            currentAppCount = snapshot.size; 
+            
+            if (snapshot.empty && !isBackfilling) {
+                appGallery.innerHTML = ""; 
+                loadingAppsMsg.textContent = "No hay aplicaciones para mostrar.";
+                loadingAppsMsg.style.display = "block";
+                return;
+            }
+            
+            if (snapshot.empty && isBackfilling) {
+                loadingAppsMsg.textContent = "Corrigiendo apps, un momento...";
+                loadingAppsMsg.style.display = "block";
+                return;
+            }
+            
+            loadingAppsMsg.style.display = "none";
+            appGallery.innerHTML = ""; 
+            adminAppList.innerHTML = ""; 
+            
+            snapshot.docs.forEach((doc, index) => { 
+                const app = doc.data();
+                const id = doc.id;
+                renderAppCard(app, id, index); 
+                renderAdminListItem(app, id);
+            });
+        }, (error) => {
+            console.error("Error al leer de Firestore: ", error);
+            loadingAppsMsg.innerHTML = `<p class="text-red-400">Error al cargar apps. Revisa la consola (F12) para más detalles.</p>`;
+            loadingAppsMsg.style.display = "block";
+        });
 
-        // Renderizar Card (con data-ispwa)
-        function renderAppCard(app, id, index) { 
-            const card = document.createElement("div"); 
-            card.className = "app-card";
-            card.setAttribute("data-id", id);
-            
-            card.setAttribute("data-nombre", app.nombre);
-            card.setAttribute("data-icono", app.icono);
-            card.setAttribute("data-desc", app.descripcion);
-            card.setAttribute("data-link", app.link);
-            card.setAttribute("data-screenshots", JSON.stringify(app.screenshots || []));
-            card.setAttribute("data-ispwa", app.isPWA || false); 
-            
-            card.classList.add("card-fade-in");
-            card.style.animationDelay = `${index * 80}ms`;
-            
-            card.innerHTML = `
-                <img src="${app.icono}" 
-                     alt="Icono de ${app.nombre}"
-                     onerror="this.src='https://placehold.co/160x160/FFFFFF/333333?text=${app.nombre.charAt(0)}'">
-                <span class="app-card-nombre">${app.nombre}</span>
-                <span class="app-card-desc">${app.descripcion}</span>
-            `;
-            appGallery.appendChild(card);
-        }
+        // Renderizar Card (con data-ispwa)
+        function renderAppCard(app, id, index) { 
+            const card = document.createElement("div"); 
+            card.className = "app-card";
+            card.setAttribute("data-id", id);
+            
+            card.setAttribute("data-nombre", app.nombre);
+            card.setAttribute("data-icono", app.icono);
+            card.setAttribute("data-desc", app.descripcion);
+            card.setAttribute("data-link", app.link);
+            card.setAttribute("data-screenshots", JSON.stringify(app.screenshots || []));
+            card.setAttribute("data-ispwa", app.isPWA || false); 
+            
+            card.classList.add("card-fade-in");
+            card.style.animationDelay = `${index * 80}ms`;
+            
+            card.innerHTML = `
+                <img src="${app.icono}" 
+                     alt="Icono de ${app.nombre}"
+                     onerror="this.src='https://placehold.co/160x160/FFFFFF/333333?text=${app.nombre.charAt(0)}'">
+                <span class="app-card-nombre">${app.nombre}</span>
+                <span class="app-card-desc">${app.descripcion}</span>
+            `;
+            appGallery.appendChild(card);
+        }
 
-        // Renderizar item en lista de admin (con data-ispwa)
-        function renderAdminListItem(app, id) {
-            const item = document.createElement("div");
-            item.className = "admin-list-item";
-            item.setAttribute("data-id", id);
-            item.setAttribute("data-nombre", app.nombre);
-            item.setAttribute("data-icono", app.icono);
-            item.setAttribute("data-desc", app.descripcion);
-            item.setAttribute("data-link", app.link);
-            item.setAttribute("data-screenshots", JSON.stringify(app.screenshots || []));
-            item.setAttribute("data-ispwa", app.isPWA || false); 
-            
-            item.innerHTML = `
-                <span>${app.nombre}</span>
-                <div class="btn-group">
-                    <button class="btn btn-secondary text-sm !px-3 !py-1 edit-btn">Editar</button>
-                    <button class="btn btn-danger text-sm !px-3 !py-1 delete-btn">Borrar</button>
-                </div>
-            `;
-            adminAppList.appendChild(item);
-        }
-        
-        // Clics en lista de admin (Editar/Borrar)
-        adminAppList.addEventListener("click", (e) => {
-            const target = e.target;
-            const item = target.closest(".admin-list-item");
-            if (!item) return;
-            const appId = item.getAttribute("data-id");
+        // Renderizar item en lista de admin (con data-ispwa)
+        function renderAdminListItem(app, id) {
+            const item = document.createElement("div");
+            item.className = "admin-list-item";
+            item.setAttribute("data-id", id);
+            item.setAttribute("data-nombre", app.nombre);
+            item.setAttribute("data-icono", app.icono);
+            item.setAttribute("data-desc", app.descripcion);
+            item.setAttribute("data-link", app.link);
+            item.setAttribute("data-screenshots", JSON.stringify(app.screenshots || []));
+            item.setAttribute("data-ispwa", app.isPWA || false); 
+            
+            item.innerHTML = `
+Â              <span>${app.nombre}</span>
+Â              <div class="btn-group">
+                    <button class="btn btn-secondary text-sm !px-3 !py-1 edit-btn">Editar</button>
+                    <button class="btn btn-danger text-sm !px-3 !py-1 delete-btn">Borrar</button>
+                </div>
+            `;
+            adminAppList.appendChild(item);
+        }
+        
+        // Clics en lista de admin (Editar/Borrar)
+        adminAppList.addEventListener("click", (e) => {
+            const target = e.target;
+            const item = target.closest(".admin-list-item");
+            if (!item) return;
+            const appId = item.getAttribute("data-id");
 
-            if (target.classList.contains("edit-btn")) {
-                editIdInput.value = appId;
-                appNombreInput.value = item.getAttribute("data-nombre");
-                appIconoInput.value = item.getAttribute("data-icono");
-                appDescInput.value = item.getAttribute("data-desc");
-                appLinkInput.value = item.getAttribute("data-link");
-                const screenshots = JSON.parse(item.getAttribute("data-screenshots") || '[]');
-                appScreenshotsInput.value = screenshots.join(', '); 
-                appIsPWAInput.checked = item.getAttribute("data-ispwa") === 'true'; 
-                
-                adminFormSubmitBtn.textContent = "Actualizar App";
-                adminFormCancelBtn.style.display = "block";
-                adminForm.scrollIntoView({ behavior: 'smooth' });
-            }
-            
-            if (target.classList.contains("delete-btn")) {
-                deleteApp(appId);
-            }
-        });
-        
-        // Borrar App
-        async function deleteApp(id) {
-            try {
-                const appRef = doc(db, "apps", id);
-                await deleteDoc(appRef);
-                console.log("App eliminada con ID:", id);
-                resetAdminForm(); 
-            } catch (error) {
-                console.error("Error al eliminar la app:", error);
-            }
-        }
-        
-        // Resetear Formulario
-        adminFormCancelBtn.addEventListener("click", resetAdminForm);
-        function resetAdminForm() {
-            adminForm.reset();
-            editIdInput.value = ""; 
-            adminFormSubmitBtn.textContent = "Guardar App";
-            adminFormCancelBtn.style.display = "none";
-        }
+            if (target.classList.contains("edit-btn")) {
+                editIdInput.value = appId;
+                appNombreInput.value = item.getAttribute("data-nombre");
+                appIconoInput.value = item.getAttribute("data-icono");
+                appDescInput.value = item.getAttribute("data-desc");
+                appLinkInput.value = item.getAttribute("data-link");
+                const screenshots = JSON.parse(item.getAttribute("data-screenshots") || '[]');
+                appScreenshotsInput.value = screenshots.join(', '); 
+                appIsPWAInput.checked = item.getAttribute("data-ispwa") === 'true'; 
+                
+                adminFormSubmitBtn.textContent = "Actualizar App";
+                adminFormCancelBtn.style.display = "block";
+                adminForm.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            if (target.classList.contains("delete-btn")) {
+                deleteApp(appId);
+            }
+        });
+        
+        // Borrar App
+        async function deleteApp(id) {
+            try {
+                // --- CAMBIO AQUÍ: Nombre de la colección ---
+                const appRef = doc(db, "ulises_apps", id); 
+                await deleteDoc(appRef);
+                console.log("App eliminada con ID:", id);
+                resetAdminForm(); 
+            } catch (error) {
+                console.error("Error al eliminar la app:", error);
+            }
+        }
+        
+        // Resetear Formulario
+        adminFormCancelBtn.addEventListener("click", resetAdminForm);
+        function resetAdminForm() {
+            adminForm.reset();
+            editIdInput.value = ""; 
+            adminFormSubmitBtn.textContent = "Guardar App";
+            adminFormCancelBtn.style.display = "none";
+        }
 
-        // --- LÓGICA DE SORTABLEJS ---
-        
-        function initSortable() {
-            console.log("Activando modo de ordenamiento.");
-            sortable = new Sortable(appGallery, {
-                animation: 150, 
-                ghostClass: 'sortable-ghost',
-                chosenClass: 'sortable-chosen',
-                onEnd: saveOrder 
-            });
-        }
+        // --- LÓGICA DE SORTABLEJS ---
+        
+        function initSortable() {
+            console.log("Activando modo de ordenamiento.");
+            sortable = new Sortable(appGallery, {
+                animation: 150, 
+                ghostClass: 'sortable-ghost',
+                chosenClass: 'sortable-chosen',
+                onEnd: saveOrder 
+            });
+        }
 
-        async function saveOrder() {
-            console.log("Guardando nuevo orden...");
-            const items = appGallery.children;
-            const batch = writeBatch(db);
+        async function saveOrder() {
+            console.log("Guardando nuevo orden...");
+            const items = appGallery.children;
+            const batch = writeBatch(db);
 
-            Array.from(items).forEach((item, index) => {
-                const appId = item.getAttribute('data-id');
-                if (appId) {
-                    const appRef = doc(db, "apps", appId);
-                    batch.update(appRef, { orden: index });
-                }
-            });
+            Array.from(items).forEach((item, index) => {
+                const appId = item.getAttribute('data-id');
+                if (appId) {
+                    // --- CAMBIO AQUÍ: Nombre de la colección ---
+                    const appRef = doc(db, "ulises_apps", appId); 
+                    batch.update(appRef, { orden: index });
+                }
+            });
 
-            try {
-                await batch.commit(); 
-                console.log("¡Orden guardado exitosamente!");
-            } catch (error) {
-                console.error("Error al guardar el orden:", error);
-            }
-        }
-        
-        // Script de migración (Arreglo bug 'orden')
-        async function checkAndBackfillData() {
-            isBackfilling = true;
-            console.log("Buscando apps sin el campo 'orden' para migrar...");
-            
-            const allDocsQuery = query(appsCollection);
-            
-            try {
-                const snapshot = await getDocs(allDocsQuery); 
-                
-                const batch = writeBatch(db);
-                let docsToBackfill = 0;
-                
-                snapshot.docs.forEach((documentSnapshot, index) => {
-                    const app = documentSnapshot.data();
-                    if (app.orden === undefined) {
-                        console.warn(`App sin 'orden': ${app.nombre}. Asignando orden: ${index}`);
-                        const appRef = doc(db, "apps", documentSnapshot.id); 
-                        batch.update(appRef, { orden: index }); 
-                        docsToBackfill++;
-                    }
-                });
-                
-                if (docsToBackfill > 0) {
-                    console.log(`Actualizando ${docsToBackfill} apps. Por favor espera...`);
-                    await batch.commit(); 
-                    console.log("¡Migración completada! Las apps ahora son visibles.");
-                } else {
-                    console.log("No se necesita migración. Todas las apps están correctas.");
-                }
-                
-            } catch (error) {
-                console.error("Error durante la migración de datos:", error);
-            }
-            
-            isBackfilling = false;
-        }
-        
-        // --- LÓGICA DE GEMINI API ---
-        
-        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+            try {
+                await batch.commit(); 
+                console.log("¡Orden guardado exitosamente!");
+            } catch (error) {
+                console.error("Error al guardar el orden:", error);
+            }
+        }
+        
+        // Script de migración (Arreglo bug 'orden')
+        async function checkAndBackfillData() {
+            isBackfilling = true;
+            console.log("Buscando apps sin el campo 'orden' para migrar...");
+            
+            const allDocsQuery = query(appsCollection);
+            
+            try {
+                const snapshot = await getDocs(allDocsQuery); 
+                
+                const batch = writeBatch(db);
+                let docsToBackfill = 0;
+                
+                snapshot.docs.forEach((documentSnapshot, index) => {
+Â                    const app = documentSnapshot.data();
+Â                    if (app.orden === undefined) {
+                        console.warn(`App sin 'orden': ${app.nombre}. Asignando orden: ${index}`);
+                        // --- CAMBIO AQUÍ: Nombre de la colección ---
+                        const appRef = doc(db, "ulises_apps", documentSnapshot.id); 
+                        batch.update(appRef, { orden: index }); 
+                        docsToBackfill++;
+                    }
+                });
+                
+                if (docsToBackfill > 0) {
+                    console.log(`Actualizando ${docsToBackfill} apps. Por favor espera...`);
+                    await batch.commit(); 
+                    console.log("¡Migración completada! Las apps ahora son visibles.");
+                } else {
+                    console.log("No se necesita migración. Todas las apps están correctas.");
+                }
+                
+            } catch (error) {
+                console.error("Error durante la migración de datos:", error);
+            }
+            
+            isBackfilling = false;
+        }
+        
+        // --- LÓGICA DE GEMINI API ---
+        
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-        async function fetchWithRetry(url, options, retries = 3, backoff = 1000) {
-            let lastResponse = null; 
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const response = await fetch(url, options);
-                    lastResponse = await response.json(); 
-                    
-                    if (response.ok) {
-                        return lastResponse; 
-                    }
-                    console.warn(`Intento ${i + 1} fallido (Respuesta no OK): ${response.statusText}`, lastResponse);
-                } catch (error) {
-                    console.warn(`Intento ${i + 1} fallido (Error de red/fetch): ${error.message}`);
-                }
-                await delay(backoff);
-                backoff *= 2; 
-            }
-            console.error("Fallaron todos los intentos de fetch. Última respuesta recibida:", lastResponse);
-            throw new Error("No se pudo obtener respuesta de la API después de varios intentos.");
-        }
+        async function fetchWithRetry(url, options, retries = 3, backoff = 1000) {
+            let lastResponse = null; 
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    lastResponse = await response.json(); 
+                    
+                    if (response.ok) {
+                        return lastResponse; 
+                    }
+                    console.warn(`Intento ${i + 1} fallido (Respuesta no OK): ${response.statusText}`, lastResponse);
+                } catch (error) {
+                    console.warn(`Intento ${i + 1} fallido (Error de red/fetch): ${error.message}`);
+                }
+                await delay(backoff);
+                backoff *= 2; 
+            }
+            console.error("Fallaron todos los intentos de fetch. Última respuesta recibida:", lastResponse);
+a           throw new Error("No se pudo obtener respuesta de la API después de varios intentos.");
+        }
 
 
-        async function callGeminiAPI(userQuery) {
-            // !! IMPORTANTE !!
-            // Pega tu API Key de Google Cloud aquí para que la API de Gemini funcione.
-            const apiKey = "AIzaSyDtlj3ppT9WBGMR60SZx0TZmAo3BXQWDX0"; // <-- PON TU API KEY AQUÍ
-            
-            if (!apiKey) {
-                console.error("API Key de Gemini no encontrada. Por favor, añádela en el script.");
-                throw new Error("API Key no configurada.");
-            }
-            
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        async function callGeminiAPI(userQuery) {
+            // !! IMPORTANTE !!
+            // Pega tu API Key de Google Cloud aquí para que la API de Gemini funcione.
+            const apiKey = "AIzaSyDtlj3ppT9WBGMR60SZx0TZmAo3BXQWDX0"; // <-- PON TU API KEY AQUÍ
+            
+            if (!apiKey) {
+                console.error("API Key de Gemini no encontrada. Por favor, añádela en el script.");
+                throw new Error("API Key no configurada.");
+            }
+            
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: {
-                    parts: [{ text: "Eres un asistente de marketing experto. Genera texto conciso, profesional y atractivo en español." }]
-                },
-            };
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: "Eres un asistente de marketing experto. Genera texto conciso, profesional y atractivo en español." }]
+section         },
+            };
 
-            const options = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            };
+            const options = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+section           body: JSON.stringify(payload)
+            };
 
-            let result; 
-            try {
-                result = await fetchWithRetry(apiUrl, options);
-            } catch (fetchError) {
-                console.error("Error en fetchWithRetry:", fetchError.message);
-                throw new Error("Error de red al contactar la API de Gemini.");
-            }
+            let result; 
+            try {
+                result = await fetchWithRetry(apiUrl, options);
+            } catch (fetchError) {
+                console.error("Error en fetchWithRetry:", fetchError.message);
+                throw new Error("Error de red al contactar la API de Gemini.");
+            }
 
-            console.log("Respuesta completa de Gemini API:", JSON.stringify(result, null, 2));
+            console.log("Respuesta completa de Gemini API:", JSON.stringify(result, null, 2));
 
-            const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-            
-            if (!text) {
-                console.error("La respuesta de la API no contenía 'candidates' o 'text'. Revisa la respuesta de arriba. Puede ser un error de API Key, facturación, o la API no está habilitada.", result);
-                throw new Error("La respuesta de la API no contiene texto válido.");
-            }
-            
-            return text.replace(/```json|```/g, "").trim().replace(/^"|"$/g, '');
-        }
+            const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+            
+            if (!text) {
+                console.error("La respuesta de la API no contenía 'candidates' o 'text'. Revisa la respuesta de arriba. Puede ser un error de API Key, facturación, o la API no está habilitada.", result);
+section               throw new Error("La respuesta de la API no contiene texto válido.");
+            }
+            
+            return text.replace(/```json|```/g, "").trim().replace(/^"|"$/g, '');
+        }
 
-        geminiEnhanceBtn.addEventListener("click", async () => {
-            const appName = appNombreInput.value;
-            const appDesc = appDescInput.value;
+        geminiEnhanceBtn.addEventListener("click", async () => {
+            const appName = appNombreInput.value;
+            const appDesc = appDescInput.value;
 
-            if (!appName) {
-                geminiLoading.textContent = "Por favor, escribe un nombre primero.";
-                geminiLoading.style.color = "#F87171"; // Rojo
-                geminiLoading.style.display = "inline";
-                await delay(2000);
-                geminiLoading.style.display = "none";
-                geminiLoading.style.color = "#9CA3AF"; // Gris
-                return;
-            }
+            if (!appName) {
+                geminiLoading.textContent = "Por favor, escribe un nombre primero.";
+section               geminiLoading.style.color = "#F87171"; // Rojo
+                geminiLoading.style.display = "inline";
+                await delay(2000);
+                geminiLoading.style.display = "none";
+                geminiLoading.style.color = "#9CA3AF"; // Gris
+                return;
+            }
 
-            geminiLoading.textContent = "Generando...";
-            geminiLoading.style.display = "inline";
-            geminiEnhanceBtn.disabled = true;
+            geminiLoading.textContent = "Generando...";
+section           geminiLoading.style.display = "inline";
+            geminiEnhanceBtn.disabled = true;
 
-            let prompt;
-            if (appDesc) {
-                prompt = `Mejora esta descripción para una app llamada "${appName}". Hazla sonar más profesional y atractiva, pero mantenla corta (máximo 25 palabras). Descripción original: "${appDesc}"`;
-            } else {
-                prompt = `Genera una descripción breve (máximo 20 palabras) y profesional para una aplicación web llamada "${appName}".`;
-            }
+            let prompt;
+            if (appDesc) {
+                prompt = `Mejora esta descripción para una app llamada "${appName}". Hazla sonar más profesional y atractiva, pero mantenla corta (máximo 25 palabras). Descripción original: "${appDesc}"`;
+            } else {
+                prompt = `Genera una descripción breve (máximo 20 palabras) y profesional para una aplicación web llamada "${appName}".`;
+section           }
 
-            try {
-                const newDesc = await callGeminiAPI(prompt);
-                appDescInput.value = newDesc; 
-            } catch (error) {
-                console.error("Error al llamar a Gemini API:", error.message);
-                geminiLoading.textContent = "Error de API";
-                if(error.message.includes("API Key")) {
-                    geminiLoading.textContent = "Falta API Key";
-                }
-                geminiLoading.style.color = "#F87171"; // Rojo
-                await delay(2000);
-            }
+            try {
+                const newDesc = await callGeminiAPI(prompt);
+                appDescInput.value = newDesc; 
+            } catch (error) {
+                console.error("Error al llamar a Gemini API:", error.message);
+                geminiLoading.textContent = "Error de API";
+                if(error.message.includes("API Key")) {
+section                     geminiLoading.textContent = "Falta API Key";
+                }
+                geminiLoading.style.color = "#F87171"; // Rojo
+section               await delay(2000);
+            }
 
-            geminiLoading.style.display = "none";
-            geminiLoading.style.color = "#9CA3AF"; // Gris
-            geminiEnhanceBtn.disabled = false;
-        });
+            geminiLoading.style.display = "none";
+            geminiLoading.style.color = "#9CA3AF"; // Gris
+            geminiEnhanceBtn.disabled = false;
+  D     });
 
-    </script>
+    </script>
 </body>
 </html>
